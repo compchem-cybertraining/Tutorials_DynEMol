@@ -47,7 +47,7 @@
 
   driver_MM         =  MM_Dynamics
 
-  read_velocities   =  false 
+  read_velocities   =  true 
 
   MM_input_format   =  GMX  
 
