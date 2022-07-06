@@ -1,0 +1,28 @@
+#!/bin/sh
+#SBATCH --partition=valhalla  --qos=valhalla
+#SBATCH --clusters=faculty
+##SBATCH --partition=general-compute  --qos=general-compute
+##SBATCH --clusters=ub-hpc
+##SBATCH --partition=scavenger  --qos=scavenger
+#SBATCH --time=00:10:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=8
+#SBATCH --ntasks=8
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=60000
+echo "SLURM_JOBID="$SLURM_JOBID
+echo "SLURMTMPDIR="$SLURMTMPDIR
+echo "working directory="$SLURM_SUBMIT_DIR
+
+# Here load whatever which is needed for running dynemol
+module load intel-oneapi
+module load mkl/2020.2
+
+# For GNU compilers
+
+# For slurm environments
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+export DYNEMOLDIR="/projects/academic/cyberwksp21/Software/dynemol/Dynemol-SN"
+export DYNEMOLWORKDIR=$SLURM_SUBMIT_DIR
+
+$DYNEMOLDIR/dynemol
