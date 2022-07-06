@@ -1,0 +1,47 @@
+!--------------------------------------------------------------------
+!                               ACTION	flags
+
+  DRIVER = q_dynamics              ! <== q_dynamics , avrg_confgs , Genetic_Alg , diagnostic , slice_[Cheb, AO, FSSH, CSDM] , MM_Dynamics
+			
+  nuclear_matter = extended_sys             ! <== solvated_sys , extended_sys , MDynamics
+			
+  survival     = true
+  file_type    =  structure                 ! <== structure or trajectory
+  file_format  =  pdb                       ! <== xyz , pdb or vasp
+
+  PBC = [ 1 , 1 , 0 ] 
+
+  electron_state = DBB:84
+  hole_state = DBB:83
+
+  sigma     =  0.040d0                                     !
+  DOS_range = real_interval( -15.d0 , 0.d0 ) 
+
+  t_f  =  0.5d0                             ! <== final time in PICOseconds
+  n_t  =  1000
+!------------------------------------------------------------------------------
+!                               SYSTEM  INFO
+
+!  N_of_molecules = 2                      ! <== total number of molecules
+!  N_of_species   = 2                      ! <== total number of species
+
+!  species(1) % residue         = DBB      ! <== Residue label for species i ; character(len3)
+!  species(1) % N_of_molecules  = 1        ! <== Number of molecules of species i
+!  species(1) % N_of_atoms      = 64       ! <== Number of atoms comprosing a single molecule of species i
+!  species(1) % flex            = T_       ! <== Flexible : T_ , F_
+!
+!  species(2) % residue         = CCC      ! <== Residue label for species i ; character(len3)
+!  species(2) % N_of_molecules  = 1        ! <== Number of molecules of species i
+!  species(2) % N_of_atoms      = 479      ! <== Number of atoms comprosing a single molecule of species i
+!  species(2) % flex            = F_       ! <== Flexible : T_ , F_
+!
+!  Selective_Dynamics = .false.            ! <== ad_hoc_MM_tuning sets MegaMass to selected atoms
+!------------------------------------------------------------------------------
+! AD-HOC settings
+
+  OPT_parms = true
+  ad_hoc = true
+  ad_hoc:QM:residue(63:64)=CCC
+  ad_hoc:QM:nr(63:64)=2
+  ad_hoc:QM:V_shift(1:62)=0.6
+
